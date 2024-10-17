@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Shop",
-    "slug": "Shop",
+    "name": "shop",
+    "slug": "shop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/adaptive-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/adaptive-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.aadarsh15.shop"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "48a2d96b-455d-450d-85ee-086c2821a270"
+      }
+    },
+    "owner": "aadarsh15"
   }
 }
