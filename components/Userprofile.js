@@ -52,7 +52,7 @@ export const Userprofile = ({close}) => {
     </View>
         <View style={style.profileImage}>
             <AntDesign name="user" size={40} color="black" />
-            <Text>Adarsh</Text>
+            <Text>{username}</Text>
          </View> 
          <View>
           <View style={style.rows}>

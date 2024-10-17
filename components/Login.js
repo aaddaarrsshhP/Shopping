@@ -1,5 +1,5 @@
 import React, {  useState } from 'react'
-import { Pressable,Image, StyleSheet, TextInput, View, Button } from 'react-native'
+import { Pressable,Image, StyleSheet, TextInput, View, Button, Text } from 'react-native'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {  useDispatch } from 'react-redux';
@@ -49,13 +49,12 @@ export const Login = ({close}) => {
             } catch (e) {
               console.log("Error occured: ",e);
               }
-              
-            
-            })
-       }
-          catch(e){
-            console.log("Error");
+            }).
+            catch(error=>console.log(error))
           }
+       catch(error){
+        console.log(error);
+       }
         
     }
 
@@ -82,11 +81,17 @@ export const Login = ({close}) => {
       userid: user.uid
     });
 
+    dispatch(onLogIn({
+      username: username,
+      userid: user.email,
+      email: user.uid
+}))
+
   } catch (e) {
     console.log("async storage error:");
   }
   
-})
+}).catch(error=>console.log(error))
   }
 
 
@@ -97,7 +102,7 @@ export const Login = ({close}) => {
             <Pressable onPress={()=>close(false)}>
               <Ionicons name="arrow-back-outline" size={25} color="black" />
             </Pressable>
-        
+        <Text style={Styles.headerfavourite}>{wnattoSignin ? "Sign in" : "Sign up"}</Text>
     </View>
    {wnattoSignin ? <View style={Styles.container}>
              
@@ -167,4 +172,9 @@ const Styles=StyleSheet.create({
       marginBottom: 10,
       paddingVertical: 10
   },
+
+headerfavourite:{
+  fontSize: 20,
+  fontWeight: 'bold'
+},
 })
