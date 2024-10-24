@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Modal,SafeAreaView, StyleSheet, Text, View,StatusBar, Image, Button, ScrollView, Pressable } from 'react-native'
 import { useState,useEffect } from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -21,6 +21,7 @@ export const Details = ({product,close}) => {
     const productData=product
     const [count,setCount]=useState(1)
         
+    
     const disabeButton=cart.some(item=>item.productdata.id==productData.id)
     const heartButton=favourite.some(item=>item.id==productData.id)
     console.log("cart",cart);
@@ -59,7 +60,7 @@ export const Details = ({product,close}) => {
 
       console.log("Adding to favourite data");
       
-      if(!favourite.some(item=>item.id==data.id))
+      if(!heartButton.current)
      {
       dispatch(onDataEntry({
         cart: [...cart],
@@ -145,9 +146,9 @@ export const Details = ({product,close}) => {
         <Text style={Styles.mrp}>MRP inclusive of all taxes</Text>
         <Text style={Styles.rupee}>Rs.{Math.round(Number(productData.price) * 80)}</Text>
        {!disabeButton ? <View style={Styles.count}>
-          <Pressable disabled={disabeButton} onPress={AddCount}><Text style={Styles.plusminus}>+</Text></Pressable>
+          <Pressable  onPress={AddCount}><Text style={Styles.plusminus}>+</Text></Pressable>
           <Text style={Styles.plusminus}>{count}</Text>
-          <Pressable disabled={disabeButton} onPress={dropCount}><Text style={Styles.plusminus}>-</Text></Pressable>
+          <Pressable  onPress={dropCount}><Text style={Styles.plusminus}>-</Text></Pressable>
         </View> : null}
         <Button disabled={disabeButton} title={disabeButton ? "Added to Cart" : "Add to Cart"} onPress={()=>addToCart(productData)} color='black'/>
         <Text style={Styles.deliverytime}>Delivery Time: 2-7 days</Text> 

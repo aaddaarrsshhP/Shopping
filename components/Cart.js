@@ -51,7 +51,8 @@ function Post(){
            favourite: [...favourite],
            cart: [...cart]
        })
-   
+
+       clearTimeout(timeout.current)
        timeout.current=null
    }
    catch(error)

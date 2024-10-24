@@ -10,7 +10,7 @@ export const EditPhone = ({close}) => {
     const dispatch=useDispatch()
 
     const checkNumber=()=>{
-        if(number.length ===10 ){
+        if(number.length === 10 ){
             dispatch(onPhonechange({
                 phone: number
             }))

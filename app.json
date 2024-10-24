@@ -4,10 +4,10 @@
     "slug": "shop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/adaptive-icon.png",
+    "icon": "./assets/shopping-1705800_1280.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/adaptive-icon.png",
+      "image": "./assets/shopping-1705800_1280.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/shopping-1705800_1280.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.aadarsh15.shop"

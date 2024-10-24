@@ -35,18 +35,14 @@ export const Lineargradient=()=>{
 
 export const Home = ({navigation}) => {
     
-    const val=useRef(1)
+    
     const uid=useSelector(selectUserid)
-    const email=useSelector(selectEmail)
-    const username=useSelector(state=>state.user.username)
-    const favourite=useSelector(selectFavourite)
-    const cart=useSelector(selectCart)
     const [productData,setProductData]=useState(null)
     const dispatch=useDispatch()
     const [modalData,setModaldata]=useState(null)
     const [isLoading,setIsloading]=useState(true)
+    const timeout=useRef()
     
-
 
     console.log("dfdsnf dsfjdsf df jdf dfdjhdf dfjh f dsfj h dsfjdsfdsf hdsf ");
         
@@ -67,10 +63,15 @@ export const Home = ({navigation}) => {
 
     useEffect(()=>{
         console.log("Inside effect");
-       setTimeout(()=>setIsloading(false),3000)
 
        async function GetAlldata(){
            await fetchData()
+
+       timeout.current=setTimeout(()=>{
+        setIsloading(false)
+        clearTimeout(timeout.current)
+        
+        },2000)
            try {
             const value =JSON.parse(await AsyncStorage.getItem('my-key'));
             console.log("Stored-value",value);
@@ -111,41 +112,11 @@ export const Home = ({navigation}) => {
                          )) :null
                         
                          console.log("Adress changing place fhjdfhjf dfhdfdhfj fhdsfdsfh dfjhd f");
-                         
+                        
                     
-                         }
-                         else{
-
-                            //         dispatch(onLogOut())
-                                      
-        
-                            //         dispatch(onDataEntry({
-                            //             cart:  [],
-                            //             favourite:  []  
-                            //          }))
-        
-                            //          dispatch(onPhonechange({
-                            //             phone: null}))
-                                       
-                            //     }
-                            //  })
-        
-                            //  dispatch(onOrderchange({
-                            //     order:  []}))
-        
-                            //     dispatch(onAddressEntry({
-                            //         address:  []}))
-        
-        
-                            //      dispatch(puttingCurrentAddress({
-                            //         currentAddress:  null}
-                            //      )) 
-                           
-                           
-                           
-                             }
-        
-                            })}
+                         
+                        }
+                          })}
                 catch(error)
                  {
                     console.log("Error getting data from database");
@@ -154,42 +125,14 @@ export const Home = ({navigation}) => {
                  
             }
             catch (error) {
-                dispatch(onLogOut())
-                              
-
-                            dispatch(onDataEntry({
-                                cart:  [],
-                                favourite:  []  
-                             }))
-
-                             dispatch(onPhonechange({
-                                phone: null}))
-                               
-                        
-                     
-
-                     dispatch(onOrderchange({
-                        order:  []}))
-
-                        dispatch(onAddressEntry({
-                            address:  []}))
-
-
-                         dispatch(puttingCurrentAddress({
-                            currentAddress:  null}
-                         )) 
-                   
-            console.log("Error fetching value");
+                
+                console.log("Error fetching value");
           }
         }
 
         GetAlldata()
 
-        // async function remove(){
-        //     await AsyncStorage.removeItem('my-key')
-        //     await fetchData()
-        // }
-        // remove()
+        
         
     },[uid])
 
@@ -205,6 +148,7 @@ export const Home = ({navigation}) => {
     }
   return (
     <ScrollView>
+         
       <View style={styles.container}>
         <Text style={[styles.text,{alignSelf: 'center'}]}>Free Shipping above ₹1999</Text>
         <Pressable style={styles.imagecontainer} onPress={productData ? ()=>setModaldata(productData[0]) : null}>
@@ -244,7 +188,7 @@ export const Home = ({navigation}) => {
            
            /> 
         </Pressable>
-     </View>
+     </View> 
      {modalData ? <Details product={modalData} close={setModaldata}/> : null} 
     </ScrollView>
   )

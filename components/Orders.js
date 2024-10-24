@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { View,Pressable,Modal,SafeAreaView, StyleSheet, Text, ScrollView, Button } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Billingaddress } from './Billingaddress';
@@ -14,6 +14,7 @@ import { database } from '../firebase';
 import { onOrderchange, selectOrder } from '../store/userOrder';
 import { Loginpopup } from './Loginpopup';
 import { Ordercomplete } from './Ordercomplete';
+
 
 
 export const Orders = ({close,shipping,total}) => {
@@ -34,6 +35,7 @@ export const Orders = ({close,shipping,total}) => {
        const phoneNumber=useSelector(selectPhone)
        const dispatch=useDispatch()
        const [completeinformation,setProvidecompeteinformation]=useState(false)
+       const timeout=useRef()
        console.log("yserid: ",user);  
        console.log("Phonnumber: ",phoneNumber);
        console.log("currrentaddress: ",currentAddress);
@@ -87,9 +89,10 @@ export const Orders = ({close,shipping,total}) => {
 
       setOrderComplete(true)
      
-      setTimeout(()=>{
+     timeout.current= setTimeout(()=>{
          setOrderComplete(false)
          close(false)
+         clearTimeout(timeout.current)
         
       },2000)
       
@@ -100,7 +103,9 @@ export const Orders = ({close,shipping,total}) => {
      } 
      else{
         setProvidecompeteinformation(true)
-        setTimeout(()=>setProvidecompeteinformation(false),2000)
+        timeout.current=setTimeout(()=>{setProvidecompeteinformation(false)
+        clearTimeout(timeout.current)
+        },2000)
         return ;  
      }
   }
@@ -222,7 +227,8 @@ const styles=StyleSheet.create({
     },
     billingaddress:{
           flexDirection: 'row',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          flexWrap: 'wrap'
     }
 
 

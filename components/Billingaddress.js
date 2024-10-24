@@ -20,7 +20,7 @@ export const Billingaddress = ({close}) => {
     const stateRef=useRef()
      const arrayOFaddress=useSelector(selectAddress)
 
-    let check
+    
     console.log("Billiiii: ",arrayOFaddress);  
     
     const handlebackbutton=()=>{
@@ -36,6 +36,8 @@ export const Billingaddress = ({close}) => {
         !state ? error.state="Please enter state" : !states.includes(state.toLowerCase()) ? error.state="India doesn't have this state": ""
         console.log(!error);
         setError(error)
+        
+        let check
 
         if(!Object.keys(error).length)
         {

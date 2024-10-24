@@ -18,7 +18,7 @@ const userSlice=createSlice({
         },
 
         onLogOut:(state,action)=>{
-            state.username="guest"    
+            state.username="Guest"    
             state.userid= null
             state.email=null
         }

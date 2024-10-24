@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Modal,Text,View } from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export const Loginpopup = ({close}) => {
     
+  const timeout=useRef()
     useEffect(()=>{
     
-      setTimeout(()=>close(false),2000)
+      timeout.current=setTimeout(()=>{
+        close(false)
+        clearTimeout(timeout.current)
+      },2000)
     }
     ,[])
   return (

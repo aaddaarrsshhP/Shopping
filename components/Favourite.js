@@ -22,10 +22,7 @@ export const Favourite = ({close}) => {
     const timeout=useRef(false)
     const timeoutcart=useRef(false)
 
-    const handlenavigation=(item)=>{
-        
-        close(false)
-    }
+    
 
     const handlebackbutton=()=>{
         
@@ -46,7 +43,7 @@ export const Favourite = ({close}) => {
                    favourite: [...newFav],
                    cart: [...cart]
                })
-
+               clearTimeout(timeout.current)
                timeout.current=false
                      
                       }
@@ -87,6 +84,8 @@ export const Favourite = ({close}) => {
            cart: [...cart]
        })
                   
+       clearTimeout(timeoutcart.current)     
+       timeoutcart.current=false
         }
      catch(error)
      {
